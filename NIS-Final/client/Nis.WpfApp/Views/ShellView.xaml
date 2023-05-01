@@ -1,0 +1,181 @@
+﻿<Window
+    x:Name="Win"
+    x:Class="Nis.WpfApp.Views.ShellView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
+    Title="Výukový Nemocniční Informační Systém"
+    mc:Ignorable="d"
+    MinHeight="760"
+    MinWidth="1280"
+    WindowStyle="None"
+    AllowsTransparency="True"
+    Background="Transparent"
+    WindowStartupLocation="CenterScreen"
+    FontFamily="{StaticResource Poppins-Regular}"
+>
+    <Border
+        CornerRadius="20"
+        Background="{Binding BackCol}"
+    >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="220" />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <StackPanel
+                    Orientation="Vertical"
+                    Margin="0 80 0 0"
+                >
+                    <TextBlock
+                        Text="VNIS"
+                        FontSize="20"
+                        Margin="65 0 0 0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource Poppins-Bold}"
+                    >
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{DynamicResource Primary100Foreground}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                    <StackPanel
+                        Margin="0 50 0 0"
+                        Orientation="Vertical"
+                    >
+                        <Button
+                            Width="120"
+                            FontSize="16"
+                            Cursor="Hand"
+                            x:Name="StartExam"
+                            Content="Začít test"
+                            HorizontalAlignment="Center"
+                            FontFamily="{StaticResource Poppins-Regular}" 
+                        >
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}" />
+                            </Button.BorderBrush>
+                            <Button.Foreground>
+                                <SolidColorBrush Color="{DynamicResource Accent200Foreground}" />
+                            </Button.Foreground>
+                            <Button.Background>
+                                <SolidColorBrush />
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Vertical"
+                    >
+                        <Button
+                            Width="120"
+                            FontSize="16"
+                            Cursor="Hand"
+                            Content="Nastavení"
+                            x:Name="OpenSettings"
+                            HorizontalAlignment="Center"
+                            FontFamily="{StaticResource Poppins-Regular}"
+                        >
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}" />
+                            </Button.BorderBrush>
+                            <Button.Foreground>
+                                <SolidColorBrush Color="{DynamicResource Accent200Foreground}" />
+                            </Button.Foreground>
+                            <Button.Background>
+                                <SolidColorBrush />
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1" Background="#EFF2F8">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ContentControl
+                        Width="Auto"
+                        Margin="0 20 0 20"
+                        x:Name="ActiveItem"
+                        FocusVisualStyle="{x:Null}"
+                    />
+                </ScrollViewer>
+                <notifications:NotificationArea
+                    MaxItems="3"
+                    x:Name="WindowArea"
+                    Position="TopCenter"
+                />
+            </Grid>
+            <StackPanel Grid.Column="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Button
+                        Height="25"
+                        Cursor="Hand"
+                        Grid.Column="1"
+                        Margin="0 0 20 10"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        x:Name="ShutdownApplication"
+                    >
+                        <TextBlock Text="x" Margin="0 -3 0 0" />
+                    </Button>
+                    <Image
+                        Width="200"
+                        Height="70"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Source="/Assets/Logo/fzs-logo.png"
+                    />
+                    <Ellipse
+                        Width="36"
+                        Height="36"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="20 0 0 0"
+                        HorizontalAlignment="Center"
+                    >
+                        <Ellipse.Fill>
+                            <ImageBrush
+                                Stretch="UniformToFill"
+                                ImageSource="{Binding Student.ProfileImage}"
+                            />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock
+                        Grid.Row="2"
+                        FontSize="14"
+                        Grid.Column="1"
+                        Margin="10 0 0 0"
+                        FontWeight="DemiBold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontFamily="{StaticResource Poppins-Regular}"
+                    >
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Student.FirstName"/>
+                                <Binding Path="Student.LastName"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{DynamicResource Accent700Foreground}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
